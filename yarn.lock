@@ -2000,10 +2000,10 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@opentron/java-tron-provider@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@opentron/java-tron-provider/-/java-tron-provider-0.2.1.tgz#1b4707db9e2c28db5d6bf4157872421d6c84bf8f"
-  integrity sha512-hbGi9jmGAIreohSxzdqwNH+s+4hY6dMH665UOC+xNASyb/cBzJ1qflwKiNfaVIAUvIHlHexIM2nYZ2c329RSTg==
+"@opentron/java-tron-provider@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@opentron/java-tron-provider/-/java-tron-provider-0.2.2.tgz#454fb146ac20f572bdbe8a7ef0a969685f4f60cc"
+  integrity sha512-XPBBakWUXVOHq+Stnr0CqruU5qJIq97xVCO9JyyyXFa6QP+FwqJAuEoG4fA4ks0jyG8ffIV5pTOHkx6k6BaprQ==
   dependencies:
     "@opentron/tron-eth-conversions" "^0.2.0"
     axios "^0.19.2"
@@ -2033,13 +2033,15 @@
     bs58check "^2.1.2"
     web3 "^1.2.11"
 
-"@opentron/tronlink-provider@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@opentron/tronlink-provider/-/tronlink-provider-0.2.1.tgz#b18f8c7f47a617b3c923e37f8542ab21b108727a"
-  integrity sha512-jEh+vqepSLqhGxbk213VDIe+Z5CcMj3VhAKFblpp8BoOPs0ye2a6bGPwxFbQzym44j7mQQEaa99gT3qvBxbdQA==
+"@opentron/tronlink-provider@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@opentron/tronlink-provider/-/tronlink-provider-0.2.2.tgz#72a82662eba696ed043e613187e9ca94a81b2a2c"
+  integrity sha512-hL6fLGgYqf9I2eTo0d9pGHAnKDla8S5fJj0ILy4uCjL5H9XNO+YuHAZimF8EosOc4bBnhg3J7BOBDKW0NRznig==
   dependencies:
-    "@opentron/java-tron-provider" "^0.2.1"
+    "@opentron/java-tron-provider" "^0.2.2"
     "@opentron/tron-eth-conversions" "^0.2.0"
+    eth-rpc-errors "^3.0.0"
+    json-rpc-engine "^5.3.0"
     web3 "^1.2.11"
 
 "@popperjs/core@^2.4.4":
