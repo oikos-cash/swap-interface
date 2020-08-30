@@ -1,12 +1,14 @@
+import createTronLinkProvider from '@opentron/tronlink-provider'
+
 import { AbstractConnectorArguments, ConnectorUpdate } from '@web3-react/types'
 import { AbstractConnector } from '@web3-react/abstract-connector'
-import warning from 'tiny-warning'
+// import warning from 'tiny-warning'
 
 type SendReturnResult = { result: any }
 type SendReturn = any
 
 type Send = (method: string, params?: any[]) => Promise<SendReturnResult | SendReturn>
-type SendOld = ({ method }: { method: string }) => Promise<SendReturnResult | SendReturn>
+// type SendOld = ({ method }: { method: string }) => Promise<SendReturnResult | SendReturn>
 
 interface Ethereum {
   send: Send
@@ -20,10 +22,6 @@ declare interface Window {
 }
 
 declare const __DEV__: boolean
-
-function parseSendReturn(sendReturn: SendReturnResult | SendReturn): any {
-  return sendReturn.hasOwnProperty('result') ? sendReturn.result : sendReturn
-}
 
 export class NoEthereumProviderError extends Error {
   public constructor() {
@@ -41,16 +39,28 @@ export class UserRejectedRequestError extends Error {
   }
 }
 
-export class InjectedConnector extends AbstractConnector {
+export class InjectedTronConnector extends AbstractConnector {
+  public provider: any
+
   constructor(kwargs: AbstractConnectorArguments) {
     super(kwargs)
+    this.provider = createTronLinkProvider()
 
+    /*
     this.handleNetworkChanged = this.handleNetworkChanged.bind(this)
     this.handleChainChanged = this.handleChainChanged.bind(this)
     this.handleAccountsChanged = this.handleAccountsChanged.bind(this)
     this.handleClose = this.handleClose.bind(this)
+    */
   }
 
+  async sendProvider(...args: any[]) {
+    const res = await this.provider.send(...args)
+    // TODO: wrap error with throw new NoEthereumProviderError()?
+    return res.result
+  }
+
+  /*
   private handleChainChanged(chainId: string | number): void {
     if (__DEV__) {
       console.log("Handling 'chainChanged' event with payload", chainId)
@@ -82,7 +92,15 @@ export class InjectedConnector extends AbstractConnector {
     }
     this.emitUpdate({ chainId: networkId, provider: window.ethereum })
   }
+  */
 
+  public async activate(): Promise<ConnectorUpdate> {
+    const accounts = await this.sendProvider('eth_requestAccounts')
+    const account = accounts[0]
+    return { provider: this.provider, account }
+  }
+
+  /*
   public async activate(): Promise<ConnectorUpdate> {
     if (!window.ethereum) {
       throw new NoEthereumProviderError()
@@ -122,85 +140,28 @@ export class InjectedConnector extends AbstractConnector {
 
     return { provider: window.ethereum, ...(account ? { account } : {}) }
   }
+  */
 
   public async getProvider(): Promise<any> {
-    return window.ethereum
+    return this.provider
   }
 
   public async getChainId(): Promise<number | string> {
-    if (!window.ethereum) {
-      throw new NoEthereumProviderError()
-    }
-
-    let chainId
-    try {
-      chainId = await ((window.ethereum as Ethereum).send as Send)('eth_chainId').then(parseSendReturn)
-    } catch {
-      warning(false, 'eth_chainId was unsuccessful, falling back to net_version')
-    }
-
-    if (!chainId) {
-      try {
-        chainId = await ((window.ethereum as Ethereum).send as Send)('net_version').then(parseSendReturn)
-      } catch {
-        warning(false, 'net_version was unsuccessful, falling back to net version v2')
-      }
-    }
-
-    if (!chainId) {
-      try {
-        chainId = parseSendReturn(
-          (((window.ethereum as Ethereum).send as unknown) as SendOld)({ method: 'net_version' })
-        )
-      } catch {
-        warning(false, 'net_version v2 was unsuccessful, falling back to manual matches and static properties')
-      }
-    }
-
-    if (!chainId) {
-      if ((window.ethereum as any).isDapper) {
-        chainId = parseSendReturn((window.ethereum as any).cachedResults.net_version)
-      } else {
-        chainId =
-          (window.ethereum as any).chainId ||
-          (window.ethereum as any).netVersion ||
-          (window.ethereum as any).networkVersion ||
-          (window.ethereum as any)._chainId
-      }
-    }
-
+    const chainId = await this.sendProvider('eth_chainId')
     return chainId
   }
 
   public async getAccount(): Promise<null | string> {
-    if (!window.ethereum) {
-      throw new NoEthereumProviderError()
-    }
-
-    let account
-    try {
-      account = await ((window.ethereum as Ethereum).send as Send)('eth_accounts').then(
-        sendReturn => parseSendReturn(sendReturn)[0]
-      )
-    } catch {
-      warning(false, 'eth_accounts was unsuccessful, falling back to enable')
-    }
-
-    if (!account) {
-      try {
-        account = await (window.ethereum as Ethereum).enable().then(sendReturn => parseSendReturn(sendReturn)[0])
-      } catch {
-        warning(false, 'enable was unsuccessful, falling back to eth_accounts v2')
-      }
-    }
-
-    if (!account) {
-      account = parseSendReturn(((window.ethereum as any).send as SendOld)({ method: 'eth_accounts' }))[0]
-    }
-
+    const accounts = await this.sendProvider('eth_requestAccounts')
+    const account = accounts[0]
     return account
   }
 
+  public deactivate() {
+    return true
+  }
+
+  /*
   public deactivate() {
     if (window.ethereum && window.ethereum.removeListener) {
       window.ethereum.removeListener('chainChanged', this.handleChainChanged)
@@ -209,7 +170,14 @@ export class InjectedConnector extends AbstractConnector {
       window.ethereum.removeListener('networkChanged', this.handleNetworkChanged)
     }
   }
+   */
 
+  public async isAuthorized(): Promise<boolean> {
+    // TODO: check if tronlink unlocked?
+    return true
+  }
+
+  /*
   public async isAuthorized(): Promise<boolean> {
     if (!window.ethereum) {
       return false
@@ -227,4 +195,5 @@ export class InjectedConnector extends AbstractConnector {
       return false
     }
   }
+ */
 }
