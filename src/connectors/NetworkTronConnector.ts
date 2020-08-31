@@ -10,7 +10,7 @@ export class NetworkTronConnector extends InjectedTronConnector {
 
   async requestProvider(...args: any[]) {
     const res = await this.provider.request(...args)
-    console.log(res)
+    // console.log(res)
     // TODO: wrap error with throw new NoEthereumProviderError()?
     return res
   }
