@@ -57,10 +57,12 @@ export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contrac
   if (chainId) {
     switch (chainId) {
       case ChainId.MAINNET:
-      case ChainId.GÖRLI:
-      case ChainId.ROPSTEN:
-      case ChainId.RINKEBY:
-        address = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
+        // TODO: TRON: mainnet TNS
+        address = '0xtodo'
+        break
+      // TODO
+      case ChainId.NILE:
+        address = '0xD2577ec90C6Fb23EC208B27609867E30D69bDc89'
         break
     }
   }
