@@ -1,7 +1,9 @@
 import { ChainId, JSBI, Percent, Token, WETH } from '@oikos/swap-sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
-import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
+// @TRON
+// import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
+import { injected } from '../connectors'
 
 // https://etherscan.io/address/0x7a250d5630b4cf539739df2c5dacb4c659f2488d#code
 const ROUTER_ADDRESS_NILE = '0x0D4516930Df056c015e2ea7E4a959f3dcAaB823F'
@@ -29,6 +31,8 @@ const WETH_ONLY: ChainTokenList = {
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, COMP, MKR]
+  // @TRON
+  // [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, COMP, MKR]
 }
 
 /**
@@ -37,30 +41,38 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
  */
 export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {
   [ChainId.MAINNET]: {
-    [AMPL.address]: [DAI, WETH[ChainId.MAINNET]]
+    // @TRON
+    // [AMPL.address]: [DAI, WETH[ChainId.MAINNET]]
   }
 }
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET]]
+  // @TRON
+  // [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET]]
+  // @TRON
+  // [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
   [ChainId.MAINNET]: [
+    // @TRON
+    /*
     [
       new Token(ChainId.MAINNET, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
       new Token(ChainId.MAINNET, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin')
     ],
     [USDC, USDT],
     [DAI, USDT]
+		*/
   ]
 }
 
@@ -81,11 +93,12 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     connector: injected,
     name: 'Injected',
     iconName: 'arrow-right.svg',
-    description: 'Injected web3 provider.',
+    description: 'Injected provider.',
     href: null,
     color: '#010101',
     primary: true
   },
+  /*
   METAMASK: {
     connector: injected,
     name: 'MetaMask',
@@ -94,6 +107,17 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     href: null,
     color: '#E8831D'
   },
+	*/
+  TRONLINK: {
+    connector: injected,
+    name: 'TronLink',
+    iconName: 'tronlink.svg',
+    description: 'Easy-to-use browser extension.',
+    href: null,
+    color: '#48489b'
+  }
+  // @TRON
+  /*
   WALLET_CONNECT: {
     connector: walletconnect,
     name: 'WalletConnect',
@@ -138,6 +162,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#4A6C9B',
     mobile: true
   }
+	*/
 }
 
 export const NetworkContextName = 'NETWORK'
