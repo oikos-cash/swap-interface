@@ -5,7 +5,9 @@ import { InjectedTronConnector } from './injected-tron-connector'
 export class NetworkTronConnector extends InjectedTronConnector {
   constructor(kwargs: any) {
     super(kwargs)
-    this.provider = createJavaTronProvider()
+    this.provider = createJavaTronProvider({
+      network: process.env.REACT_APP_TRON_NETWORK
+    })
   }
 
   async requestProvider(...args: any[]) {
