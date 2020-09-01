@@ -7,6 +7,7 @@ import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUnisw
 import { ROUTER_ADDRESS } from '../constants'
 import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@oikos/swap-sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
+import { ethAddress } from '@opentron/tron-eth-conversions'
 
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
@@ -40,7 +41,17 @@ export function getEtherscanLink(chainId: ChainId, data: string, type: 'transact
   }
 }
 
-// shorten the checksummed version of the input address to have 0x + 4 characters at start and end
+// shorten the checksummed version of the input address to have 4 characters at start and end
+export function shortenAddress(address: string, chars = 4): string {
+  const parsed = isAddress(address)
+  if (!parsed) {
+    throw Error(`Invalid 'address' parameter '${address}'.`)
+  }
+  const tronAddress = ethAddress.toTron(parsed)
+  return `${tronAddress.substring(0, chars)}...${tronAddress.substr(-chars)}`
+}
+
+/*
 export function shortenAddress(address: string, chars = 4): string {
   const parsed = isAddress(address)
   if (!parsed) {
@@ -48,6 +59,7 @@ export function shortenAddress(address: string, chars = 4): string {
   }
   return `${parsed.substring(0, chars + 2)}...${parsed.substring(42 - chars)}`
 }
+*/
 
 // add 10%
 export function calculateGasMargin(value: BigNumber): BigNumber {
