@@ -42,12 +42,16 @@ export default function Updater(): null {
   useEffect(() => {
     if (!chainId || !library || !lastBlockNumber) return
 
+    // @TRON
+    // console.log({ transactions })
     Object.keys(transactions)
       .filter(hash => shouldCheck(lastBlockNumber, transactions[hash]))
       .forEach(hash => {
+        // console.log({ hash });
         library
           .getTransactionReceipt(hash)
           .then(receipt => {
+            // console.log({ receipt })
             if (receipt) {
               dispatch(
                 finalizeTransaction({
