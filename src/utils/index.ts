@@ -7,7 +7,7 @@ import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUnisw
 import { ROUTER_ADDRESS } from '../constants'
 import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@oikos/swap-sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
-import { ethAddress } from '@opentron/tron-eth-conversions'
+import { ethAddress, remove0xPrefix } from '@opentron/tron-eth-conversions'
 
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
@@ -29,7 +29,7 @@ export function getEtherscanLink(chainId: ChainId, data: string, type: 'transact
 
   switch (type) {
     case 'transaction': {
-      return `${prefix}/#/transaction/${data}`
+      return `${prefix}/#/transaction/${remove0xPrefix(data)}`
     }
     case 'token': {
       return `${prefix}/#/token20/${ethAddress.toTron(data)}`
