@@ -174,6 +174,7 @@ export default function Swap() {
     }
   }, [approval, approvalSubmitted])
 
+  // console.log({ currencyBalances })
   const maxAmountInput: CurrencyAmount | undefined = maxAmountSpend(currencyBalances[Field.INPUT])
   const atMaxAmountInput = Boolean(maxAmountInput && parsedAmounts[Field.INPUT]?.equalTo(maxAmountInput))
 
