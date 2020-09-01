@@ -5,10 +5,10 @@ import { Text } from 'rebass'
 
 import styled from 'styled-components'
 
-import Logo from '../../assets/svg/logo.svg'
-import LogoDark from '../../assets/svg/logo_white.svg'
-import Wordmark from '../../assets/svg/wordmark.svg'
-import WordmarkDark from '../../assets/svg/wordmark_white.svg'
+import Logo from '../../assets/oikos-logo.svg'
+import LogoDark from '../../assets/oikos-logo-dark.svg'
+// import Wordmark from '../../assets/svg/wordmark.svg'
+// import WordmarkDark from '../../assets/svg/wordmark_white.svg'
 import { useActiveWeb3React } from '../../hooks'
 import { useDarkModeManager } from '../../state/user/hooks'
 import { useETHBalances } from '../../state/wallet/hooks'
@@ -55,6 +55,7 @@ const Title = styled.a`
   display: flex;
   align-items: center;
   pointer-events: auto;
+	text-decoration: none;
 
   :hover {
     cursor: pointer;
@@ -63,6 +64,11 @@ const Title = styled.a`
 
 const TitleText = styled(Row)`
   width: fit-content;
+	color: #000;
+	font-size: 22px;
+	font-weight: bold;
+	margin-left: 15px;
+	text-transform: uppercase;
   white-space: nowrap;
   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
     display: none;
@@ -99,6 +105,9 @@ const NetworkCard = styled(YellowCard)`
 
 const UniIcon = styled.div`
   transition: transform 0.3s ease;
+	img {
+		height: 40px;
+	}
   :hover {
     transform: rotate(-5deg);
   }
@@ -146,7 +155,8 @@ export default function Header() {
               <img src={isDark ? LogoDark : Logo} alt="logo" />
             </UniIcon>
             <TitleText>
-              <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />
+							Swap
+							{/* <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" /> */}
             </TitleText>
           </Title>
         </HeaderElement>
