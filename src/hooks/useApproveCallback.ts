@@ -8,7 +8,8 @@ import { getTradeVersion, useV1TradeExchangeAddress } from '../data/V1'
 import { Field } from '../state/swap/actions'
 import { useTransactionAdder, useHasPendingApproval } from '../state/transactions/hooks'
 import { computeSlippageAdjustedAmounts } from '../utils/prices'
-import { calculateGasMargin } from '../utils'
+// @TRON
+// import { calculateGasMargin } from '../utils'
 import { useTokenContract } from './useContract'
 import { useActiveWeb3React } from './index'
 import { Version } from './useToggledVersion'
@@ -74,15 +75,21 @@ export function useApproveCallback(
     }
 
     let useExact = false
+    // @TODO(tron): implement estimageGas in java-tron-provider
+    /*
     const estimatedGas = await tokenContract.estimateGas.approve(spender, MaxUint256).catch(() => {
       // general fallback for tokens who restrict approval amounts
       useExact = true
       return tokenContract.estimateGas.approve(spender, amountToApprove.raw.toString())
     })
+    */
 
+    // console.log({ tokenContract })
     return tokenContract
       .approve(spender, useExact ? amountToApprove.raw.toString() : MaxUint256, {
-        gasLimit: calculateGasMargin(estimatedGas)
+        // @TRON
+        // gasLimit: calculateGasMargin(estimatedGas)
+        gasLimit: 1
       })
       .then((response: TransactionResponse) => {
         addTransaction(response, {

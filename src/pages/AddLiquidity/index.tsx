@@ -170,6 +170,13 @@ export default function AddLiquidity({
       value = null
     }
 
+    // @TRON
+    // @TODO(tron): implement eth_estimateGas in java-tron-provider
+    // mock in meanwhile...
+    estimate = async (...args: any[]) => {
+      return BigNumber.from(1)
+    }
+
     setAttemptingTxn(true)
     await estimate(...args, value ? { value } : {})
       .then(estimatedGasLimit =>

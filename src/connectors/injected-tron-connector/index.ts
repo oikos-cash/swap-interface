@@ -2,6 +2,7 @@ import createTronLinkProvider from '@opentron/tronlink-provider'
 
 import { AbstractConnectorArguments, ConnectorUpdate } from '@web3-react/types'
 import { AbstractConnector } from '@web3-react/abstract-connector'
+import { abis } from './tronlink-abis'
 // import warning from 'tiny-warning'
 
 export class NoEthereumProviderError extends Error {
@@ -27,7 +28,8 @@ export class InjectedTronConnector extends AbstractConnector {
     super(kwargs)
     // TODO(tron): should auto-use same network as one selected in tronlink!
     this.provider = createTronLinkProvider({
-      network: process.env.REACT_APP_TRON_NETWORK
+      network: process.env.REACT_APP_TRON_NETWORK,
+      functionSignatures: abis
     })
 
     /*
