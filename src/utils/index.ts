@@ -25,6 +25,24 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
 
 // TODO: TRON: use tronscan...
 export function getEtherscanLink(chainId: ChainId, data: string, type: 'transaction' | 'token' | 'address'): string {
+  const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}tronscan.org`
+
+  switch (type) {
+    case 'transaction': {
+      return `${prefix}/#/transaction/${data}`
+    }
+    case 'token': {
+      return `${prefix}/#/token20/${ethAddress.toTron(data)}`
+    }
+    case 'address':
+    default: {
+      return `${prefix}/#/address/${ethAddress.toTron(data)}`
+    }
+  }
+}
+
+/*
+export function getEtherscanLink(chainId: ChainId, data: string, type: 'transaction' | 'token' | 'address'): string {
   const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}etherscan.io`
 
   switch (type) {
@@ -40,6 +58,7 @@ export function getEtherscanLink(chainId: ChainId, data: string, type: 'transact
     }
   }
 }
+*/
 
 // shorten the checksummed version of the input address to have 4 characters at start and end
 export function shortenAddress(address: string, chars = 4): string {
