@@ -5,6 +5,7 @@ declare module 'jazzicon' {
 }
 
 declare module 'fortmatic'
+declare module '@opentron/tron-eth-conversions'
 
 interface Window {
   ethereum?: {
