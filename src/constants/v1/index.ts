@@ -6,7 +6,7 @@ import V1_FACTORY_ABI from './v1_factory.json'
 const V1_FACTORY_ADDRESSES: { [chainId in ChainId]: string } = {
   // TODO: TRON: mainnet factory address
   [ChainId.MAINNET]: '0xtodofactoryv1mainnet',
-  [ChainId.NILE]: '0xtodonilev1factory',
+  [ChainId.NILE]: '0x64d5aF91C3A4aE5dB503dA8be25b5E47ad2D944e',
   [ChainId.SHASTA]: '0xtodofactoryv1shasta'
 }
 
