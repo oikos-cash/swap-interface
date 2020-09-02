@@ -6,7 +6,7 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { injected } from '../connectors'
 
 // https://etherscan.io/address/0x7a250d5630b4cf539739df2c5dacb4c659f2488d#code
-const ROUTER_ADDRESS_NILE = '0x0D4516930Df056c015e2ea7E4a959f3dcAaB823F'
+const ROUTER_ADDRESS_NILE = '0x8275b71F102B646360f77703CFD25564Fe6B770F'
 // TODO(tron): deploy router on mainnet!
 export const ROUTER_ADDRESS = ROUTER_ADDRESS_NILE
 
