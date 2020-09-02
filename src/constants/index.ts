@@ -24,7 +24,8 @@ export const AMPL = new Token(ChainId.MAINNET, '0xD46bA6D942050d489DBd938a2C909A
 
 const WETH_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
-  [ChainId.NILE]: [WETH[ChainId.NILE]]
+  [ChainId.NILE]: [WETH[ChainId.NILE]],
+  [ChainId.SHASTA]: [WETH[ChainId.SHASTA]]
 }
 
 // used to construct intermediary pairs for trading

@@ -58,7 +58,7 @@ export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contrac
     switch (chainId) {
       case ChainId.MAINNET:
         // TODO: TRON: mainnet TNS
-        address = '0xtodo'
+        address = '0xtodomainnetTNS'
         break
       // TODO
       case ChainId.NILE:

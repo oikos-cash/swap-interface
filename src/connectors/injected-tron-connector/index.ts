@@ -62,8 +62,8 @@ export class InjectedTronConnector extends AbstractConnector {
     // const chainId = await this.requestProvider({ method: 'eth_chainId' })
     // return chainId
     // TODO: TRON: wait for eth_chainId to be implemented in provider
-    console.log('TODO: TRON: eth_chainId')
-    return '1515'
+    const chainId = await this.requestProvider({ method: 'eth_chainId' })
+    return chainId
   }
 
   public async getAccount(): Promise<null | string> {

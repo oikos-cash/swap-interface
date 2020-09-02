@@ -13,7 +13,7 @@ const NETWORK_URL = process.env.REACT_APP_NETWORK_URL
 const FORMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY
 const PORTIS_ID = process.env.REACT_APP_PORTIS_ID
 
-export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1')
+export const NETWORK_CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '11111')
 
 if (typeof NETWORK_URL === 'undefined') {
   throw new Error(`REACT_APP_NETWORK_URL must be a defined environment variable`)
@@ -35,7 +35,8 @@ export function getNetworkLibrary(): Web3Provider {
 }
 
 export const injected = new InjectedTronConnector({
-  supportedChainIds: [1, 1515]
+  // mainnet and nile
+  supportedChainIds: [11111, 201910292]
 })
 
 // mainnet only

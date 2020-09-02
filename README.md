@@ -45,8 +45,15 @@ yarn start
 To have the interface default to a different network when a wallet is not connected:
 
 1. Make a copy of `.env` named `.env.local`
-2. Change `REACT_APP_NETWORK_ID` to `"{YOUR_NETWORK_ID}"` (e.g. `1515` for Tron Nile network)
-3. Change `REACT_APP_NETWORK_URL` to e.g. `"https://{YOUR_NETWORK_ID}.infura.io/v3/{YOUR_INFURA_KEY}"`
+2. Change `REACT_APP_NETWORK_ID` to `"{YOUR_NETWORK_ID}"` (e.g. `11111` for Tron Mainnet network)
+
+Example `.env.local` file for Nile network:
+
+```sh
+REACT_APP_CHAIN_ID="201910292"
+REACT_APP_NETWORK_URL="https://java-tron-nile.opentron.org"
+REACT_APP_TRON_NETWORK="nile"
+```
 
 Note that the interface only works on testnets where both
 [Uniswap V2](https://uniswap.org/docs/v2/smart-contracts/factory/) and

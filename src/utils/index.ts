@@ -19,8 +19,9 @@ export function isAddress(value: any): string | false {
 }
 
 const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
-  1: '',
-  1515: 'nile.'
+  11111: '',
+  1: 'shasta.',
+  201910292: 'nile.'
 }
 
 // TODO: TRON: use tronscan...
