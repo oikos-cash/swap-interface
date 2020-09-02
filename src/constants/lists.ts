@@ -2,7 +2,7 @@
 // export const DEFAULT_TOKEN_LIST_URL = 'tokens.uniswap.eth'
 
 export const DEFAULT_TOKEN_LIST_URL =
-  'https://raw.githubusercontent.com/oikos-cash/swap-tokens/master/default.tokenlist.json'
+  'https://raw.githubusercontent.com/oikos-cash/default-token-list/master/build/swap-default.tokenlist.json'
 
 export const DEFAULT_LIST_OF_LISTS: string[] = [
   DEFAULT_TOKEN_LIST_URL
