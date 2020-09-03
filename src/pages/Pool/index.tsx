@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useContext, useMemo, useState, useEffect } from 'react'
 import { ThemeContext } from 'styled-components'
 import { Pair } from '@oikos/swap-sdk'
 import { Link } from 'react-router-dom'
@@ -23,17 +23,30 @@ import { Dots } from '../../components/swap/styleds'
 
 export default function Pool() {
   const theme = useContext(ThemeContext)
-  const { account } = useActiveWeb3React()
-
+  const { account, library } = useActiveWeb3React()
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
-  const tokenPairsWithLiquidityTokens = useMemo(
-    () => trackedTokenPairs.map(tokens => ({ liquidityToken: toV2LiquidityToken(tokens), tokens })),
-    [trackedTokenPairs]
-  )
-  const liquidityTokens = useMemo(() => tokenPairsWithLiquidityTokens.map(tpwlt => tpwlt.liquidityToken), [
-    tokenPairsWithLiquidityTokens
-  ])
+
+  const [tokenPairsWithLiquidityTokens, setTokenPairsWithLiquidityTokens] = useState<any[]>([])
+
+  useEffect(() => {
+    const run = async () => {
+      if (!library) return
+      const tpwlt = await Promise.all(
+        trackedTokenPairs.map(async tokens => {
+          const liquidityToken = await toV2LiquidityToken(tokens, library)
+          return { liquidityToken, tokens }
+          // return { liquidityToken: await toV2LiquidityToken(tokens, library), tokens }
+        })
+      )
+      console.log({ tpwlt })
+      setTokenPairsWithLiquidityTokens(tpwlt)
+    }
+    run().catch(console.error)
+  }, [trackedTokenPairs, library])
+
+  const liquidityTokens = tokenPairsWithLiquidityTokens.map(tpwlt => tpwlt.liquidityToken)
+
   const [v2PairsBalances, fetchingV2PairBalances] = useTokenBalancesWithLoadingIndicator(
     account ?? undefined,
     liquidityTokens

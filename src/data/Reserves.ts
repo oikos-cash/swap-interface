@@ -1,5 +1,5 @@
 import { TokenAmount, Pair, Currency } from '@oikos/swap-sdk'
-import { useMemo } from 'react'
+import { useMemo, useEffect, useState } from 'react'
 import { abi as IUniswapV2PairABI } from '@uniswap/v2-core/build/IUniswapV2Pair.json'
 import { Interface } from '@ethersproject/abi'
 import { useActiveWeb3React } from '../hooks'
@@ -17,7 +17,9 @@ export enum PairState {
 }
 
 export function usePairs(currencies: [Currency | undefined, Currency | undefined][]): [PairState, Pair | null][] {
-  const { chainId } = useActiveWeb3React()
+  // @TRON
+  const [pairAddresses, setPairAddresses] = useState<any[]>([])
+  const { chainId, library } = useActiveWeb3React()
 
   const tokens = useMemo(
     () =>
@@ -28,6 +30,25 @@ export function usePairs(currencies: [Currency | undefined, Currency | undefined
     [chainId, currencies]
   )
 
+  // @TRON
+  useEffect(() => {
+    const run = async () => {
+      const addrs = await Promise.all(
+        tokens.map(async ([tokenA, tokenB]) => {
+          if (library && tokenA && tokenB && !tokenA.equals(tokenB)) {
+            const addr = await Pair.getAddressAsync(tokenA, tokenB, library)
+            return addr
+          }
+          return undefined
+        })
+      )
+      setPairAddresses(addrs)
+    }
+    run().catch(console.error)
+  }, [tokens, library])
+
+  // @TRON
+  /*
   const pairAddresses = useMemo(
     () =>
       tokens.map(([tokenA, tokenB]) => {
@@ -35,6 +56,7 @@ export function usePairs(currencies: [Currency | undefined, Currency | undefined
       }),
     [tokens]
   )
+  */
 
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
 

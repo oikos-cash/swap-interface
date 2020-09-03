@@ -2,6 +2,7 @@ import { ChainId, Pair, Token } from '@oikos/swap-sdk'
 import flatMap from 'lodash.flatmap'
 import { useCallback, useMemo } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { Web3Provider } from '@ethersproject/providers';
 import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from '../../constants'
 
 import { useActiveWeb3React } from '../../hooks'
@@ -165,8 +166,11 @@ export function usePairAdder(): (pair: Pair) => void {
  * @param tokenA one of the two tokens
  * @param tokenB the other token
  */
-export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token]): Token {
-  return new Token(tokenA.chainId, Pair.getAddress(tokenA, tokenB), 18, 'UNI-V2', 'Uniswap V2')
+export async function toV2LiquidityToken([tokenA, tokenB]: [Token, Token], library: Web3Provider): Promise<Token> {
+  const pairAddress = await Pair.getAddressAsync(tokenA, tokenB, library)
+  // TODO: memoize?
+  console.log({ pairAddress });
+  return new Token(tokenA.chainId, pairAddress, 18, 'UNI-V2', 'Uniswap V2')
 }
 
 /**
