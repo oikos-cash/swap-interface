@@ -112,6 +112,15 @@ export default function Menu() {
             <MessageCircle size={14} />
             Telegram
           </MenuItem>
+          <MenuItem id="link" href="https://oikos.cash">
+            Oikos.cash
+          </MenuItem>
+          <MenuItem id="link" href="https://oikos.exchange">
+            Oikos Exchange
+          </MenuItem>
+          <MenuItem id="link" href="https://minter.oikos.cash">
+            Oikos Minter
+          </MenuItem>
           {/*
           <MenuItem id="link" href="https://uniswap.info/">
             <PieChart size={14} />

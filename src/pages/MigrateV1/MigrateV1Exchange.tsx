@@ -319,7 +319,7 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
         </div>
       </LightCard>
       <TYPE.darkGray style={{ textAlign: 'center' }}>
-        {`Your Uniswap V1 ${token.symbol}/TRX liquidity will become Swap V2 ${token.symbol}/TRX liquidity.`}
+        {`Your Swap V1 ${token.symbol}/TRX liquidity will become Swap V2 ${token.symbol}/TRX liquidity.`}
       </TYPE.darkGray>
     </AutoColumn>
   )
