@@ -56,9 +56,9 @@ export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contrac
   let address: string | undefined
   if (chainId) {
     switch (chainId) {
+      // TODO(tron): shasta TNS ?
       case ChainId.MAINNET:
-        // TODO: TRON: mainnet TNS
-        address = '0xtodomainnetTNS'
+        address = '0x99fb68F0672E3E16AbB071342eF03355dfcb1797'
         break
       // TODO
       case ChainId.NILE:

@@ -1,6 +1,6 @@
 import MIGRATOR_ABI from './migrator.json'
 
-// TODO(tron): migrator address
-const MIGRATOR_ADDRESS = '0xtodomigrator'
+// @TRON
+const MIGRATOR_ADDRESS = '0xE2a0D44B863eF9361c38fD67A2D2db34E2516EC5'
 
 export { MIGRATOR_ADDRESS, MIGRATOR_ABI }
