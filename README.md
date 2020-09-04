@@ -31,13 +31,13 @@ repository.
 ### Install Dependencies
 
 ```bash
-yarn
+npm install
 ```
 
 ### Run
 
 ```bash
-yarn start
+npm start
 ```
 
 ### Configuring the environment (optional)
@@ -51,7 +51,6 @@ Example `.env.local` file for Nile network:
 
 ```sh
 REACT_APP_CHAIN_ID="201910292"
-REACT_APP_NETWORK_URL="https://java-tron-nile.opentron.org"
 REACT_APP_TRON_NETWORK="nile"
 ```
 
