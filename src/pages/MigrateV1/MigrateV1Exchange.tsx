@@ -64,15 +64,18 @@ export function V1LiquidityInfo({
 
   return (
     <>
+      {/*
       <AutoRow style={{ justifyContent: 'flex-start', width: 'fit-content' }}>
         <CurrencyLogo size="24px" currency={token} />
         <div style={{ marginLeft: '.75rem' }}>
+          @TODO(tron): fixme
           <TYPE.mediumHeader>
             {<FormattedPoolCurrencyAmount currencyAmount={liquidityTokenAmount} />}{' '}
             {chainId && token.equals(WETH[chainId]) ? 'WTRX' : token.symbol}/TRX
           </TYPE.mediumHeader>
         </div>
       </AutoRow>
+      */}
 
       <RowBetween my="1rem">
         <Text fontSize={16} fontWeight={500}>
@@ -167,30 +170,38 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
   const migrate = useCallback(() => {
     if (!minAmountToken || !minAmountETH || !migrator) return
 
-    setConfirmingMigration(true)
-    migrator
-      .migrate(
-        token.address,
-        minAmountToken.toString(),
-        minAmountETH.toString(),
-        account,
-        Math.floor(new Date().getTime() / 1000) + DEFAULT_DEADLINE_FROM_NOW
-      )
-      .then((response: TransactionResponse) => {
-        ReactGA.event({
-          category: 'Migrate',
-          action: 'V1->V2',
-          label: token?.symbol
-        })
+    try {
+      setConfirmingMigration(true)
+      migrator
+        .migrate(
+          token.address,
+          minAmountToken.toString(),
+          minAmountETH.toString(),
+          account,
+          Math.floor(new Date().getTime() / 1000) + DEFAULT_DEADLINE_FROM_NOW,
+          // @TRON
+          // dummy value to prevent failed eth_gasEstimate call
+          { gasLimit: 1 }
+        )
+        .then((response: TransactionResponse) => {
+          ReactGA.event({
+            category: 'Migrate',
+            action: 'V1->V2',
+            label: token?.symbol
+          })
 
-        addTransaction(response, {
-          summary: `Migrate ${token.symbol} liquidity to V2`
+          addTransaction(response, {
+            summary: `Migrate ${token.symbol} liquidity to V2`
+          })
+          setPendingMigrationHash(response.hash)
         })
-        setPendingMigrationHash(response.hash)
-      })
-      .catch(() => {
-        setConfirmingMigration(false)
-      })
+        .catch((err: Error) => {
+          console.error(err)
+          setConfirmingMigration(false)
+        })
+    } catch (err) {
+      console.error(err)
+    }
   }, [minAmountToken, minAmountETH, migrator, token, account, addTransaction])
 
   const noLiquidityTokens = !!liquidityTokenAmount && liquidityTokenAmount.equalTo(ZERO)
