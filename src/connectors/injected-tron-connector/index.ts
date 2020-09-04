@@ -5,14 +5,6 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { abis } from './tronlink-abis'
 // import warning from 'tiny-warning'
 
-export class NoEthereumProviderError extends Error {
-  public constructor() {
-    super()
-    this.name = this.constructor.name
-    this.message = 'No Ethereum provider was found on window.ethereum.'
-  }
-}
-
 export class UserRejectedRequestError extends Error {
   public constructor() {
     super()
@@ -43,7 +35,6 @@ export class InjectedTronConnector extends AbstractConnector {
   async requestProvider(args: any) {
     const res = await this.provider.request(args)
     // console.log({ res })
-    // TODO: wrap error with throw new NoEthereumProviderError()?
     return res
   }
 
@@ -59,9 +50,6 @@ export class InjectedTronConnector extends AbstractConnector {
   }
 
   public async getChainId(): Promise<number | string> {
-    // const chainId = await this.requestProvider({ method: 'eth_chainId' })
-    // return chainId
-    // TODO: TRON: wait for eth_chainId to be implemented in provider
     const chainId = await this.requestProvider({ method: 'eth_chainId' })
     return chainId
   }
