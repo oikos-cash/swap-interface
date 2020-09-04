@@ -15,8 +15,9 @@ import { SUPPORTED_WALLETS } from '../../constants'
 // import MetamaskIcon from '../../assets/images/metamask.png'
 import TronLinkIcon from '../../assets/images/tronlink.svg'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
-import { injected, fortmatic /*, portis*/ } from '../../connectors'
-import { OVERLAY_READY } from '../../connectors/Fortmatic'
+import { injected } from '../../connectors'
+// import { injected, fortmatic, portis } from '../../connectors'
+// import { OVERLAY_READY } from '../../connectors/Fortmatic'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
@@ -196,11 +197,13 @@ export default function WalletModal({
   }
 
   // close wallet modal if fortmatic modal is active
+  /*
   useEffect(() => {
     fortmatic.on(OVERLAY_READY, () => {
       toggleWalletModal()
     })
   }, [toggleWalletModal])
+  */
 
   // get wallets user can switch too, depending on device/browser
   function getOptions() {
