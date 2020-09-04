@@ -1,0 +1,13 @@
+# support SPA setup
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build]
+  publish = "build/"
+  command = "yarn build"
+
+[build.environment]
+  NODE_VERSION = "14.5.0"
+  # use .env.production to change env variables needed during build
