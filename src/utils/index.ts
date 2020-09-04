@@ -26,7 +26,8 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
 
 // TODO: TRON: use tronscan...
 export function getEtherscanLink(chainId: ChainId, data: string, type: 'transaction' | 'token' | 'address'): string {
-  const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}tronscan.org`
+  console.log({ chainId })
+  const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[11111]}tronscan.org`
 
   switch (type) {
     case 'transaction': {
