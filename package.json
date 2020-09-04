@@ -106,7 +106,7 @@
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "@oikos/default-token-list": "^0.1.1",
+    "@oikos/default-token-list": "^0.1.2",
     "@oikos/swap-sdk": "^3.0.17",
     "@opentron/java-tron-provider": "^0.4.1",
     "@opentron/tron-eth-conversions": "^0.4.0",
