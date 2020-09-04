@@ -6,7 +6,6 @@ import { updateVersion } from '../global/actions'
 import { acceptListUpdate, addList, fetchTokenList, removeList, selectList } from './actions'
 import SWAP_DEFAULT_LIST from '@oikos/default-token-list'
 // import UNISWAP_DEFAULT_LIST from '@uniswap/default-token-list'
-console.log({ SWAP_DEFAULT_LIST })
 
 export interface ListsState {
   readonly byUrl: {
