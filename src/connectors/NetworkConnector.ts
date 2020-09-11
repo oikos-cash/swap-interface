@@ -7,7 +7,7 @@ interface NetworkConnectorArguments {
   defaultChainId?: number
 }
 
-// taken from ethers.js, compatible interface with web3 provider
+// taken from trons.js, compatible interface with web3 provider
 type AsyncSendable = {
   isMetaMask?: boolean
   host?: string

@@ -1,9 +1,9 @@
-import { Currency, ETHER, Token } from '@oikos/swap-sdk'
+import { Currency, TRON, Token } from '@oikos/swap-sdk'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
 // @TRON
-// import EthereumLogo from '../../assets/images/ethereum-logo.png'
+// import EthereumLogo from '../../assets/images/troneum-logo.png'
 import TronLogo from '../../assets/images/tron-logo.svg'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/hooks'
@@ -40,7 +40,7 @@ export default function CurrencyLogo({
   const uriLocations = useHttpLocations(currency instanceof WrappedTokenInfo ? currency.logoURI : undefined)
 
   const srcs: string[] = useMemo(() => {
-    if (currency === ETHER) return []
+    if (currency === TRON) return []
 
     if (currency instanceof Token) {
       if (currency instanceof WrappedTokenInfo) {
@@ -52,7 +52,7 @@ export default function CurrencyLogo({
     return []
   }, [currency, uriLocations])
 
-  if (currency === ETHER) {
+  if (currency === TRON) {
     return <StyledEthereumLogo src={TronLogo} size={size} style={style} />
   }
 

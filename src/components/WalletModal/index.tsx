@@ -218,7 +218,7 @@ export default function WalletModal({
           return null
         }
 
-        if (!window.web3 && !window.ethereum && option.mobile) {
+        if (!window.web3 && !window.troneum && option.mobile) {
           return (
             <Option
               onClick={() => {
@@ -359,7 +359,7 @@ export default function WalletModal({
             @TODO(tron): opentron/oikos page listing wallets
             <Blurb>
               <span>New to Ethereum? &nbsp;</span>{' '}
-              <ExternalLink href="https://ethereum.org/wallets/">Learn more about wallets</ExternalLink>
+              <ExternalLink href="https://troneum.org/wallets/">Learn more about wallets</ExternalLink>
             </Blurb>
             */
             <Blurb />

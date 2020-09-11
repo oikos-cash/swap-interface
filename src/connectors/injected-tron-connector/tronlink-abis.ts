@@ -6,7 +6,7 @@ import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUnisw
 import ENS_ABI from '../../constants/abis/ens-registrar.json'
 import ENS_PUBLIC_RESOLVER_ABI from '../../constants/abis/ens-public-resolver.json'
 import UNISOCKS_ABI from '../../constants/abis/unisocks.json'
-import WETH_ABI from '../../constants/abis/weth.json'
+import WTRX_ABI from '../../constants/abis/weth.json'
 import { MIGRATOR_ABI } from '../../constants/abis/migrator'
 import ERC20_ABI from '../../constants/abis/erc20.json'
 import { MULTICALL_ABI } from '../../constants/multicall'
@@ -21,7 +21,7 @@ export const abis = [
   ...ENS_ABI,
   ...ENS_PUBLIC_RESOLVER_ABI,
   ...UNISOCKS_ABI,
-  ...WETH_ABI,
+  ...WTRX_ABI,
   ...MIGRATOR_ABI,
   ...MULTICALL_ABI
 ]

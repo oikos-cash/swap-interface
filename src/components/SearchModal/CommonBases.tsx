@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text } from 'rebass'
-import { ChainId, Currency, currencyEquals, ETHER, Token } from '@oikos/swap-sdk'
+import { ChainId, Currency, currencyEquals, TRON, Token } from '@oikos/swap-sdk'
 import styled from 'styled-components'
 
 import { SUGGESTED_BASES } from '../../constants'
@@ -45,13 +45,13 @@ export default function CommonBases({
       <AutoRow gap="4px">
         <BaseWrapper
           onClick={() => {
-            if (!selectedCurrency || !currencyEquals(selectedCurrency, ETHER)) {
-              onSelect(ETHER)
+            if (!selectedCurrency || !currencyEquals(selectedCurrency, TRON)) {
+              onSelect(TRON)
             }
           }}
-          disable={selectedCurrency === ETHER}
+          disable={selectedCurrency === TRON}
         >
-          <CurrencyLogo currency={ETHER} style={{ marginRight: 8 }} />
+          <CurrencyLogo currency={TRON} style={{ marginRight: 8 }} />
           <Text fontWeight={500} fontSize={16}>
             TRX
           </Text>

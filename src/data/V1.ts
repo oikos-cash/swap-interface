@@ -4,7 +4,7 @@ import {
   Currency,
   CurrencyAmount,
   currencyEquals,
-  ETHER,
+  TRON,
   JSBI,
   Pair,
   Percent,
@@ -13,7 +13,7 @@ import {
   TokenAmount,
   Trade,
   TradeType,
-  WETH
+  WTRX
 } from '@oikos/swap-sdk'
 import { useMemo } from 'react'
 import { useActiveWeb3React } from '../hooks'
@@ -31,16 +31,16 @@ export function useV1ExchangeAddress(tokenAddress?: string): string | undefined 
 }
 
 export class MockV1Pair extends Pair {
-  constructor(etherAmount: BigintIsh, tokenAmount: TokenAmount) {
-    super(tokenAmount, new TokenAmount(WETH[tokenAmount.token.chainId], etherAmount))
+  constructor(tronAmount: BigintIsh, tokenAmount: TokenAmount) {
+    super(tokenAmount, new TokenAmount(WTRX[tokenAmount.token.chainId], tronAmount))
   }
 }
 
 function useMockV1Pair(inputCurrency?: Currency): MockV1Pair | undefined {
   const token = inputCurrency instanceof Token ? inputCurrency : undefined
 
-  const isWETH = Boolean(token && token.equals(WETH[token.chainId]))
-  const v1PairAddress = useV1ExchangeAddress(isWETH ? undefined : token?.address)
+  const isWTRX = Boolean(token && token.equals(WTRX[token.chainId]))
+  const v1PairAddress = useV1ExchangeAddress(isWTRX ? undefined : token?.address)
   const tokenBalance = useTokenBalance(v1PairAddress, token)
   const ETHBalance = useETHBalances([v1PairAddress])[v1PairAddress ?? '']
 
@@ -71,7 +71,7 @@ export function useAllTokenV1Exchanges(): { [exchangeAddress: string]: Token } {
   )
 }
 
-// returns whether any of the tokens in the user's token list have liquidity on v1
+// returns whtron any of the tokens in the user's token list have liquidity on v1
 export function useUserHasLiquidityInAllTokens(): boolean | undefined {
   const { account, chainId } = useActiveWeb3React()
 
@@ -108,8 +108,8 @@ export function useV1Trade(
   const inputPair = useMockV1Pair(inputCurrency)
   const outputPair = useMockV1Pair(outputCurrency)
 
-  const inputIsETH = inputCurrency === ETHER
-  const outputIsETH = outputCurrency === ETHER
+  const inputIsETH = inputCurrency === TRON
+  const outputIsETH = outputCurrency === TRON
 
   // construct a direct or through ETH v1 route
   let pairs: Pair[] = []
@@ -161,7 +161,7 @@ export function useV1TradeExchangeAddress(trade: Trade | undefined): string | un
 const ZERO_PERCENT = new Percent('0')
 const ONE_HUNDRED_PERCENT = new Percent('1')
 
-// returns whether tradeB is better than tradeA by at least a threshold percentage amount
+// returns whtron tradeB is better than tradeA by at least a threshold percentage amount
 export function isTradeBetter(
   tradeA: Trade | undefined,
   tradeB: Trade | undefined,

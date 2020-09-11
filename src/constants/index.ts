@@ -1,11 +1,11 @@
-import { ChainId, JSBI, Percent, Token, WETH } from '@oikos/swap-sdk'
+import { ChainId, JSBI, Percent, Token, WTRX } from '@oikos/swap-sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
 // @TRON
 // import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
 import { injected } from '../connectors'
 
-// https://etherscan.io/address/0x7a250d5630b4cf539739df2c5dacb4c659f2488d#code
+// https://tronscan.io/address/0x7a250d5630b4cf539739df2c5dacb4c659f2488d#code
 const ROUTER_ADDRESS_NILE = '0x09F3D3aF89B869Cd68F45356eCd3AD3300fC9B7D'
 //const ROUTER_ADDRESS_MAINNET = '0x7f9910B8a1aB0d6A1db9AAd117f11dB5F80987Ec'
 // TODO(tron): refactor use of ROUTER_ADDRESS so that it works for both nile and mainnet...
@@ -18,24 +18,24 @@ type ChainTokenList = {
 
 // export const DAI = new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'Dai Stablecoin')
 // export const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD//C')
-// export const USDT = new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD')
+// export const USDT = new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Ttron USD')
 // export const COMP = new Token(ChainId.MAINNET, '0xc00e94Cb662C3520282E6f5717214004A7f26888', 18, 'COMP', 'Compound')
 // export const MKR = new Token(ChainId.MAINNET, '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2', 18, 'MKR', 'Maker')
 // export const AMPL = new Token(ChainId.MAINNET, '0xD46bA6D942050d489DBd938a2C909A5d5039A161', 9, 'AMPL', 'Ampleforth')
 
-const WETH_ONLY: ChainTokenList = {
-  [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
-  [ChainId.NILE]: [WETH[ChainId.NILE]],
-  [ChainId.SHASTA]: [WETH[ChainId.SHASTA]]
+const WTRX_ONLY: ChainTokenList = {
+  [ChainId.MAINNET]: [WTRX[ChainId.MAINNET]],
+  [ChainId.NILE]: [WTRX[ChainId.NILE]],
+  [ChainId.SHASTA]: [WTRX[ChainId.SHASTA]]
 }
 
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
-  ...WETH_ONLY,
+  ...WTRX_ONLY,
   // TODO(tron): USDT, sUSD, JST USDJ?
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET]]
+  [ChainId.MAINNET]: [...WTRX_ONLY[ChainId.MAINNET]]
   // @TRON
-  // [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT, COMP, MKR]
+  // [ChainId.MAINNET]: [...WTRX_ONLY[ChainId.MAINNET], DAI, USDC, USDT, COMP, MKR]
 }
 
 /**
@@ -45,24 +45,24 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
 export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {
   [ChainId.MAINNET]: {
     // @TRON
-    // [AMPL.address]: [DAI, WETH[ChainId.MAINNET]]
+    // [AMPL.address]: [DAI, WTRX[ChainId.MAINNET]]
   }
 }
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
-  ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET]]
+  ...WTRX_ONLY,
+  [ChainId.MAINNET]: [...WTRX_ONLY[ChainId.MAINNET]]
   // @TRON
-  // [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
+  // [ChainId.MAINNET]: [...WTRX_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
-  ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET]]
+  ...WTRX_ONLY,
+  [ChainId.MAINNET]: [...WTRX_ONLY[ChainId.MAINNET]]
   // @TRON
-  // [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
+  // [ChainId.MAINNET]: [...WTRX_ONLY[ChainId.MAINNET], DAI, USDC, USDT]
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {

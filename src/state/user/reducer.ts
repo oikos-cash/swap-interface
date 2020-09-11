@@ -22,7 +22,7 @@ export interface UserState {
   lastUpdateVersionTimestamp?: number
 
   userDarkMode: boolean | null // the user's choice for dark mode or light mode
-  matchesDarkMode: boolean // whether the dark mode media query matches
+  matchesDarkMode: boolean // whtron the dark mode media query matches
 
   userExpertMode: boolean
 
