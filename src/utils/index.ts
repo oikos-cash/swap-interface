@@ -5,7 +5,7 @@ import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
 import { ROUTER_ADDRESS } from '../constants'
-import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@oikos/swap-sdk'
+import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, TRON } from '@oikos/swap-sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
 import { ethAddress, remove0xPrefix } from '@opentron/tron-eth-conversions'
 
@@ -18,7 +18,7 @@ export function isAddress(value: any): string | false {
   }
 }
 
-const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
+const TRONSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   11111: '',
   1: 'shasta.',
   201910292: 'nile.'
@@ -27,7 +27,7 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
 // TODO: TRON: use tronscan...
 export function getEtherscanLink(chainId: ChainId, data: string, type: 'transaction' | 'token' | 'address'): string {
   console.log({ chainId })
-  const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[11111]}tronscan.org`
+  const prefix = `https://${TRONSCAN_PREFIXES[chainId] || TRONSCAN_PREFIXES[11111]}tronscan.org`
 
   switch (type) {
     case 'transaction': {
@@ -45,7 +45,7 @@ export function getEtherscanLink(chainId: ChainId, data: string, type: 'transact
 
 /*
 export function getEtherscanLink(chainId: ChainId, data: string, type: 'transaction' | 'token' | 'address'): string {
-  const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}etherscan.io`
+  const prefix = `https://${TRONSCAN_PREFIXES[chainId] || TRONSCAN_PREFIXES[1]}tronscan.io`
 
   switch (type) {
     case 'transaction': {
@@ -131,6 +131,6 @@ export function escapeRegExp(string: string): string {
 }
 
 export function isTokenOnList(defaultTokens: TokenAddressMap, currency?: Currency): boolean {
-  if (currency === ETHER) return true
+  if (currency === TRON) return true
   return Boolean(currency instanceof Token && defaultTokens[currency.chainId]?.[currency.address])
 }

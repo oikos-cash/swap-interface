@@ -1,7 +1,7 @@
 import { splitSignature } from '@ethersproject/bytes'
 import { Contract } from '@ethersproject/contracts'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, ETHER, Percent, WETH } from '@oikos/swap-sdk'
+import { Currency, currencyEquals, TRON, Percent, WTRX } from '@oikos/swap-sdk'
 import React, { useCallback, useContext, useMemo, useState } from 'react'
 import { ArrowDown, Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -201,8 +201,8 @@ export default function RemoveLiquidity({
     const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
     if (!liquidityAmount) throw new Error('missing liquidity amount')
 
-    const currencyBIsETH = currencyB === ETHER
-    const oneCurrencyIsETH = currencyA === ETHER || currencyBIsETH
+    const currencyBIsETH = currencyB === TRON
+    const oneCurrencyIsETH = currencyA === TRON || currencyBIsETH
     const deadlineFromNow = Math.ceil(Date.now() / 1000) + deadline
 
     if (!tokenA || !tokenB) throw new Error('could not wrap')
@@ -432,11 +432,11 @@ export default function RemoveLiquidity({
     [onUserInput]
   )
 
-  const oneCurrencyIsETH = currencyA === ETHER || currencyB === ETHER
-  const oneCurrencyIsWETH = Boolean(
+  const oneCurrencyIsETH = currencyA === TRON || currencyB === TRON
+  const oneCurrencyIsWTRX = Boolean(
     chainId &&
-      ((currencyA && currencyEquals(WETH[chainId], currencyA)) ||
-        (currencyB && currencyEquals(WETH[chainId], currencyB)))
+      ((currencyA && currencyEquals(WTRX[chainId], currencyA)) ||
+        (currencyB && currencyEquals(WTRX[chainId], currencyB)))
   )
 
   const handleSelectCurrencyA = useCallback(
@@ -564,21 +564,21 @@ export default function RemoveLiquidity({
                         </Text>
                       </RowFixed>
                     </RowBetween>
-                    {chainId && (oneCurrencyIsWETH || oneCurrencyIsETH) ? (
+                    {chainId && (oneCurrencyIsWTRX || oneCurrencyIsETH) ? (
                       <RowBetween style={{ justifyContent: 'flex-end' }}>
                         {oneCurrencyIsETH ? (
                           <StyledInternalLink
-                            to={`/remove/${currencyA === ETHER ? WETH[chainId].address : currencyIdA}/${
-                              currencyB === ETHER ? WETH[chainId].address : currencyIdB
+                            to={`/remove/${currencyA === TRON ? WTRX[chainId].address : currencyIdA}/${
+                              currencyB === TRON ? WTRX[chainId].address : currencyIdB
                             }`}
                           >
                             Receive WTRX
                           </StyledInternalLink>
-                        ) : oneCurrencyIsWETH ? (
+                        ) : oneCurrencyIsWTRX ? (
                           <StyledInternalLink
                             to={`/remove/${
-                              currencyA && currencyEquals(currencyA, WETH[chainId]) ? 'TRX' : currencyIdA
-                            }/${currencyB && currencyEquals(currencyB, WETH[chainId]) ? 'TRX' : currencyIdB}`}
+                              currencyA && currencyEquals(currencyA, WTRX[chainId]) ? 'TRX' : currencyIdA
+                            }/${currencyB && currencyEquals(currencyB, WTRX[chainId]) ? 'TRX' : currencyIdB}`}
                           >
                             Receive TRX
                           </StyledInternalLink>
@@ -691,7 +691,7 @@ export default function RemoveLiquidity({
 
       {pair ? (
         <AutoColumn style={{ minWidth: '20rem', marginTop: '1rem' }}>
-          <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
+          <MinimalPositionCard showUnwrapped={oneCurrencyIsWTRX} pair={pair} />
         </AutoColumn>
       ) : null}
     </>

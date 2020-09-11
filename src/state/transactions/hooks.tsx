@@ -7,7 +7,7 @@ import { AppDispatch, AppState } from '../index'
 import { addTransaction } from './actions'
 import { TransactionDetails } from './reducer'
 
-// helper that can take a ethers library transaction response and add it to the list of transactions
+// helper that can take a trons library transaction response and add it to the list of transactions
 export function useTransactionAdder(): (
   response: TransactionResponse,
   customData?: { summary?: string; approval?: { tokenAddress: string; spender: string } }
@@ -51,14 +51,14 @@ export function useIsTransactionPending(transactionHash?: string): boolean {
 }
 
 /**
- * Returns whether a transaction happened in the last day (86400 seconds * 1000 milliseconds / second)
+ * Returns whtron a transaction happened in the last day (86400 seconds * 1000 milliseconds / second)
  * @param tx to check for recency
  */
 export function isTransactionRecent(tx: TransactionDetails): boolean {
   return new Date().getTime() - tx.addedTime < 86_400_000
 }
 
-// returns whether a token has a pending approval transaction
+// returns whtron a token has a pending approval transaction
 export function useHasPendingApproval(tokenAddress: string | undefined, spender: string | undefined): boolean {
   const allTransactions = useAllTransactions()
   return useMemo(

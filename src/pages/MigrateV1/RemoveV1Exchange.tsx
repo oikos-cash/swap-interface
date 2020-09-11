@@ -1,5 +1,5 @@
 import { TransactionResponse } from '@ethersproject/abstract-provider'
-import { JSBI, Token, TokenAmount, WETH, Fraction, Percent, CurrencyAmount } from '@oikos/swap-sdk'
+import { JSBI, Token, TokenAmount, WTRX, Fraction, Percent, CurrencyAmount } from '@oikos/swap-sdk'
 import React, { useCallback, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import { Redirect, RouteComponentProps } from 'react-router'
@@ -50,8 +50,8 @@ function V1PairRemoval({
   const shareFraction: Fraction = totalSupply ? new Percent(liquidityTokenAmount.raw, totalSupply.raw) : ZERO_FRACTION
 
   const ethWorth: CurrencyAmount = exchangeETHBalance
-    ? CurrencyAmount.ether(exchangeETHBalance.multiply(shareFraction).multiply(WEI_DENOM).quotient)
-    : CurrencyAmount.ether(ZERO)
+    ? CurrencyAmount.tron(exchangeETHBalance.multiply(shareFraction).multiply(WEI_DENOM).quotient)
+    : CurrencyAmount.tron(ZERO)
 
   const tokenWorth: TokenAmount = exchangeTokenBalance
     ? new TokenAmount(token, shareFraction.multiply(exchangeTokenBalance.raw).quotient)
@@ -67,7 +67,7 @@ function V1PairRemoval({
     exchangeContract
       .removeLiquidity(
         liquidityTokenAmount.raw.toString(),
-        1, // min_eth, this is safe because we're removing liquidity
+        1, // MIN_TRX, this is safe because we're removing liquidity
         1, // min_tokens, this is safe because we're removing liquidity
         Math.floor(new Date().getTime() / 1000) + DEFAULT_DEADLINE_FROM_NOW
       )
@@ -79,7 +79,7 @@ function V1PairRemoval({
         })
 
         addTransaction(response, {
-          summary: `Remove ${chainId && token.equals(WETH[chainId]) ? 'WTRX' : token.symbol}/TRX V1 liquidity`
+          summary: `Remove ${chainId && token.equals(WTRX[chainId]) ? 'WTRX' : token.symbol}/TRX V1 liquidity`
         })
         setPendingRemovalHash(response.hash)
       })
@@ -119,7 +119,7 @@ function V1PairRemoval({
       </LightCard>
       <TYPE.darkGray style={{ textAlign: 'center' }}>
         {`Your Swap V1 ${
-          chainId && token.equals(WETH[chainId]) ? 'WTRX' : token.symbol
+          chainId && token.equals(WTRX[chainId]) ? 'WTRX' : token.symbol
         }/TRX liquidity will be redeemed for underlying assets.`}
       </TYPE.darkGray>
     </AutoColumn>

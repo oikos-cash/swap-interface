@@ -37,7 +37,7 @@ export function computeTradePriceBreakdown(
     trade &&
     (trade.inputAmount instanceof TokenAmount
       ? new TokenAmount(trade.inputAmount.token, realizedLPFee.multiply(trade.inputAmount.raw).quotient)
-      : CurrencyAmount.ether(realizedLPFee.multiply(trade.inputAmount.raw).quotient))
+      : CurrencyAmount.tron(realizedLPFee.multiply(trade.inputAmount.raw).quotient))
 
   return { priceImpactWithoutFee: priceImpactWithoutFeePercent, realizedLPFee: realizedLPFeeAmount }
 }
