@@ -8,7 +8,7 @@ declare module 'fortmatic'
 declare module '@opentron/tron-eth-conversions'
 
 interface Window {
-  troneum?: {
+  ethereum?: {
     isMetaMask?: true
     on?: (...args: any[]) => void
     removeListener?: (...args: any[]) => void

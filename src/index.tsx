@@ -20,8 +20,8 @@ import getLibrary from './utils/getLibrary'
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
 
 /*
-if ('troneum' in window) {
-  ;(window.troneum as any).autoRefreshOnNetworkChange = false
+if ('ethereum' in window) {
+  ;(window.ethereum as any).autoRefreshOnNetworkChange = false
 }
 */
 

@@ -59,9 +59,9 @@ export function useInactiveListener(suppress = false) {
   const { active, error, activate } = useWeb3ReactCore() // specifically using useWeb3React because of what this hook does
 
   useEffect(() => {
-    const { troneum } = window
+    const { ethereum } = window
 
-    if (troneum && troneum.on && !active && !error && !suppress) {
+    if (ethereum && ethereum.on && !active && !error && !suppress) {
       const handleChainChanged = () => {
         // eat errors
         activate(injected, undefined, true).catch(error => {
@@ -78,13 +78,13 @@ export function useInactiveListener(suppress = false) {
         }
       }
 
-      troneum.on('chainChanged', handleChainChanged)
-      troneum.on('accountsChanged', handleAccountsChanged)
+      ethereum.on('chainChanged', handleChainChanged)
+      ethereum.on('accountsChanged', handleAccountsChanged)
 
       return () => {
-        if (troneum.removeListener) {
-          troneum.removeListener('chainChanged', handleChainChanged)
-          troneum.removeListener('accountsChanged', handleAccountsChanged)
+        if (ethereum.removeListener) {
+          ethereum.removeListener('chainChanged', handleChainChanged)
+          ethereum.removeListener('accountsChanged', handleAccountsChanged)
         }
       }
     }

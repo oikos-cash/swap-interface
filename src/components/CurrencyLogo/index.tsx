@@ -3,7 +3,7 @@ import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
 // @TRON
-// import EthereumLogo from '../../assets/images/troneum-logo.png'
+// import EthereumLogo from '../../assets/images/ethereum-logo.png'
 import TronLogo from '../../assets/images/tron-logo.svg'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/hooks'
