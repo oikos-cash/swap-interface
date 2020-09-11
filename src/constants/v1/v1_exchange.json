@@ -189,7 +189,7 @@
       },
       {
         "type": "uint256",
-        "name": "min_eth"
+        "name": "MIN_TRX"
       },
       {
         "type": "uint256",
@@ -323,7 +323,7 @@
       },
       {
         "type": "uint256",
-        "name": "min_eth"
+        "name": "MIN_TRX"
       },
       {
         "type": "uint256",
@@ -349,7 +349,7 @@
       },
       {
         "type": "uint256",
-        "name": "min_eth"
+        "name": "MIN_TRX"
       },
       {
         "type": "uint256",

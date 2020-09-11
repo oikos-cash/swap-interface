@@ -67,7 +67,7 @@ function V1PairRemoval({
     exchangeContract
       .removeLiquidity(
         liquidityTokenAmount.raw.toString(),
-        1, // min_eth, this is safe because we're removing liquidity
+        1, // MIN_TRX, this is safe because we're removing liquidity
         1, // min_tokens, this is safe because we're removing liquidity
         Math.floor(new Date().getTime() / 1000) + DEFAULT_DEADLINE_FROM_NOW
       )
