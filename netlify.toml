@@ -6,7 +6,7 @@
 
 [build]
   publish = "build/"
-  command = "npm run build"
+  command = "npm ci && npm run build"
 
 [build.environment]
   NODE_VERSION = "14.5.0"
