@@ -25,7 +25,8 @@ import { Dots } from '../../components/swap/styleds'
 import { Contract } from '@ethersproject/contracts'
 import { useTotalSupply } from '../../data/TotalSupply'
 
-const WEI_DENOM = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(18))
+// const WEI_DENOM = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(18))
+const SUN_DENOM = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(6))
 const ZERO = JSBI.BigInt(0)
 const ONE = JSBI.BigInt(1)
 const ZERO_FRACTION = new Fraction(ZERO, ONE)
@@ -50,7 +51,7 @@ function V1PairRemoval({
   const shareFraction: Fraction = totalSupply ? new Percent(liquidityTokenAmount.raw, totalSupply.raw) : ZERO_FRACTION
 
   const ethWorth: CurrencyAmount = exchangeETHBalance
-    ? CurrencyAmount.ether(exchangeETHBalance.multiply(shareFraction).multiply(WEI_DENOM).quotient)
+    ? CurrencyAmount.ether(exchangeETHBalance.multiply(shareFraction).multiply(SUN_DENOM).quotient)
     : CurrencyAmount.ether(ZERO)
 
   const tokenWorth: TokenAmount = exchangeTokenBalance
