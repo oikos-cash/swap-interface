@@ -210,9 +210,9 @@ export default function RemoveLiquidity({
     let methodNames: string[], args: Array<string | string[] | number | boolean>
     // we have approval, use normal remove liquidity
     if (approval === ApprovalState.APPROVED) {
-      // removeLiquidityETH
+      // removeLiquidityTRX
       if (oneCurrencyIsETH) {
-        methodNames = ['removeLiquidityETH', 'removeLiquidityETHSupportingFeeOnTransferTokens']
+        methodNames = ['removeLiquidityTRX', 'removeLiquidityTRXSupportingFeeOnTransferTokens']
         args = [
           currencyBIsETH ? tokenA.address : tokenB.address,
           liquidityAmount.raw.toString(),
@@ -238,9 +238,9 @@ export default function RemoveLiquidity({
     }
     // we have a signataure, use permit versions of remove liquidity
     else if (signatureData !== null) {
-      // removeLiquidityETHWithPermit
+      // removeLiquidityTRXWithPermit
       if (oneCurrencyIsETH) {
-        methodNames = ['removeLiquidityETHWithPermit', 'removeLiquidityETHWithPermitSupportingFeeOnTransferTokens']
+        methodNames = ['removeLiquidityTRXWithPermit', 'removeLiquidityTRXWithPermitSupportingFeeOnTransferTokens']
         args = [
           currencyBIsETH ? tokenA.address : tokenB.address,
           liquidityAmount.raw.toString(),
@@ -254,7 +254,7 @@ export default function RemoveLiquidity({
           signatureData.s
         ]
       }
-      // removeLiquidityETHWithPermit
+      // removeLiquidityTRXWithPermit
       else {
         methodNames = ['removeLiquidityWithPermit']
         args = [

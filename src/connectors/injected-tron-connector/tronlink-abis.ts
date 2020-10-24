@@ -2,7 +2,7 @@
 import { V1_EXCHANGE_ABI, V1_FACTORY_ABI } from '../../constants/v1'
 import { abi as IUniswapV2PairABI } from '@uniswap/v2-core/build/IUniswapV2Pair.json'
 import { abi as IUniswapV2FactoryABI } from '@uniswap/v2-core/build/IUniswapV2Factory.json'
-import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
+import { abi as IUniswapV2Router02ABI } from '@oikos/swap-v2-periphery/build/IUniswapV2Router02.json'
 import ENS_ABI from '../../constants/abis/ens-registrar.json'
 import ENS_PUBLIC_RESOLVER_ABI from '../../constants/abis/ens-public-resolver.json'
 import UNISOCKS_ABI from '../../constants/abis/unisocks.json'
