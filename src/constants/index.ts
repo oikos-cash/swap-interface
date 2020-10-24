@@ -7,7 +7,8 @@ import { injected } from '../connectors'
 
 // https://etherscan.io/address/0x7a250d5630b4cf539739df2c5dacb4c659f2488d#code
 // const ROUTER_ADDRESS_NILE = '0x8275b71F102B646360f77703CFD25564Fe6B770F'
-const ROUTER_ADDRESS_MAINNET = '0x77b52F9CEF88D9b36C5C9E285D81Fe27D2cbafde'
+const ROUTER_ADDRESS_MAINNET = '0xe0a0fB33C5EC2B342a34b00ea3B72B62107bDeB8'
+
 // TODO(tron): refactor use of ROUTER_ADDRESS so that it works for both nile and mainnet...
 export const ROUTER_ADDRESS = ROUTER_ADDRESS_MAINNET
 
