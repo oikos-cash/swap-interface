@@ -22,21 +22,15 @@ export default function ListIntroduction({ onSelectList }: { onSelectList: () =>
             src={isDark ? listDark : listLight}
             alt="token-list-preview"
           />
-          <img
-            style={{ width: '100%', borderRadius: '12px' }}
-            src="https://cloudflare-ipfs.com/ipfs/QmRf1rAJcZjV3pwKTHfPdJh4RxR8yvRHkdLjZCsmp7T6hA"
-            alt="token-list-preview"
-          />
           <Text style={{ marginBottom: '8px', textAlign: 'center' }}>
-            Swap now supports token lists. You can add your own custom lists via IPFS, HTTPS and ENS.{' '}
+            Swap now supports token lists. You can add your own custom lists via IPFS and HTTPS.{' '}
           </Text>
           <ButtonPrimary onClick={onSelectList} id="list-introduction-choose-a-list">
             Choose a list
           </ButtonPrimary>
           <OutlineCard style={{ marginBottom: '8px', padding: '1rem' }}>
             <Text fontWeight={400} fontSize={14} style={{ textAlign: 'center' }}>
-              Token lists are an open specification. Check out{' '}
-              <ExternalLink href="https://tokenlists.org">tokenlists.org</ExternalLink> to learn more.
+              Token lists are an <ExternalLink href="https://tokenlists.org">open specification</ExternalLink>.
             </Text>
           </OutlineCard>
         </AutoColumn>
