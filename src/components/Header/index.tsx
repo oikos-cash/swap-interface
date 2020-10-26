@@ -157,7 +157,7 @@ export default function Header() {
               <img src={isDark ? LogoDark : Logo} alt="logo" width="142px" />
             </UniIcon>
             <TitleText>
-							{ <p style={{ marginLeft: '4px', marginTop: '4px', color: isDark ? "white" : "black", fontSize: "18px" }} > Swap</p> }
+							{ <span style={{ color: isDark ? "white" : "black", fontSize: "18px" }} > Swap</span> }
             </TitleText>
           </Title>
         </HeaderElement>
