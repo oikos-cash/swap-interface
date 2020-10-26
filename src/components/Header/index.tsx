@@ -140,6 +140,7 @@ const NETWORK_LABELS: { [chainId in ChainId]: string | null } = {
   [ChainId.NILE]: 'Nile',
   [ChainId.SHASTA]: 'Shasta'
 }
+ 
 
 export default function Header() {
   const { account, chainId } = useActiveWeb3React()
@@ -153,11 +154,10 @@ export default function Header() {
         <HeaderElement>
           <Title href=".">
             <UniIcon>
-              <img src={isDark ? LogoDark : Logo} alt="logo" />
+              <img src={isDark ? LogoDark : Logo} alt="logo" width="142px" />
             </UniIcon>
             <TitleText>
-							Swap
-							{/* <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" /> */}
+							{ <p style={{ marginLeft: '4px', marginTop: '4px', color: isDark ? "white" : "black", fontSize: "18px" }} > Swap</p> }
             </TitleText>
           </Title>
         </HeaderElement>
