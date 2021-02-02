@@ -109,8 +109,8 @@
     "@oikos/default-token-list": "^1.0.0",
     "@oikos/swap-sdk": "^3.0.35",
     "@oikos/swap-v2-periphery": "^1.1.2",
-    "@opentron/java-tron-provider": "^0.4.34",
+    "@opentron/java-tron-provider": "^0.4.35",
     "@opentron/tron-eth-conversions": "^0.4.19",
-    "@opentron/tronlink-provider": "^0.4.34"
+    "@opentron/tronlink-provider": "^0.4.35"
   }
 }
