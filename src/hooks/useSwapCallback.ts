@@ -12,6 +12,7 @@ import { useActiveWeb3React } from './index'
 import { useV1ExchangeContract } from './useContract'
 import useENS from './useENS'
 import { Version } from './useToggledVersion'
+import { DEFAULT_FEE_LIMIT } from '../tron-config'
 
 export enum SwapCallbackState {
   INVALID,
@@ -215,7 +216,7 @@ export function useSwapCallback(
         return contract[methodName](...args, {
           // gasLimit: calculateGasMargin(gasEstimate),
           // @TRON dummy gasLimit to prevent gas estimate (which is not implemented in java-tron-provider yet)
-          gasLimit: 1,
+          gasLimit: DEFAULT_FEE_LIMIT,
           ...(value && !isZero(value) ? { value, from: account } : { from: account })
         })
           .then((response: any) => {

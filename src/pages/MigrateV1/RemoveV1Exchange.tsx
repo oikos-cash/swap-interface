@@ -24,6 +24,7 @@ import { AddressZero } from '@ethersproject/constants'
 import { Dots } from '../../components/swap/styleds'
 import { Contract } from '@ethersproject/contracts'
 import { useTotalSupply } from '../../data/TotalSupply'
+import { DEFAULT_FEE_LIMIT } from '../../tron-config'
 
 // const WEI_DENOM = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(18))
 const SUN_DENOM = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(6))
@@ -73,7 +74,7 @@ function V1PairRemoval({
         Math.floor(new Date().getTime() / 1000) + DEFAULT_DEADLINE_FROM_NOW,
         // @TRON
         // prevents "Error: eth_estimateGas not implemented by java-tron-provider middleware"
-        { gasLimit: 1 }
+        { gasLimit: DEFAULT_FEE_LIMIT }
       )
       .then((response: TransactionResponse) => {
         ReactGA.event({

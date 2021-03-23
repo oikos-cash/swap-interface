@@ -41,6 +41,7 @@ import { Field } from '../../state/burn/actions'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { useUserDeadline, useUserSlippageTolerance } from '../../state/user/hooks'
 // import { BigNumber } from '@ethersproject/bignumber'
+import { DEFAULT_FEE_LIMIT } from '../../tron-config'
 
 export default function RemoveLiquidity({
   history,
@@ -309,7 +310,7 @@ export default function RemoveLiquidity({
     setAttemptingTxn(true)
     await router[methodName](...args, {
       // @TRON dummy value to prevent eth_gasEstimate call which is not implemented
-      gasLimit: 1
+      gasLimit: DEFAULT_FEE_LIMIT
       // gasLimit: safeGasEstimate
     })
       .then((response: TransactionResponse) => {

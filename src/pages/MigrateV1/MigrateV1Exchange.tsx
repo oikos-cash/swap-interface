@@ -27,6 +27,7 @@ import { BackArrow, ExternalLink, TYPE } from '../../theme'
 import { getEtherscanLink, isAddress } from '../../utils'
 import { BodyWrapper } from '../AppBody'
 import { EmptyState } from './EmptyState'
+import { DEFAULT_FEE_LIMIT } from '../../tron-config'
 
 const POOL_CURRENCY_AMOUNT_MIN = new Fraction(JSBI.BigInt(1), JSBI.BigInt(1000000))
 // const WEI_DENOM = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(18))
@@ -179,9 +180,7 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
           minAmountETH.toString(),
           account,
           Math.floor(new Date().getTime() / 1000) + DEFAULT_DEADLINE_FROM_NOW,
-          // @TRON
-          // dummy value to prevent failed eth_gasEstimate call
-          { gasLimit: 1 }
+          { gasLimit: DEFAULT_FEE_LIMIT }
         )
         .then((response: TransactionResponse) => {
           ReactGA.event({
@@ -226,8 +225,8 @@ function V1PairMigration({ liquidityTokenAmount, token }: { liquidityTokenAmount
       {!isFirstLiquidityProvider && largePriceDifference ? (
         <YellowCard>
           <TYPE.body style={{ marginBottom: 8, fontWeight: 400 }}>
-            It{"'"}s best to deposit liquidity into Oikos Swap V2 at a price you believe is correct. If the V2 price seems
-            incorrect, you can either make a swap to move the price or wait for someone else to do so.
+            It{"'"}s best to deposit liquidity into Oikos Swap V2 at a price you believe is correct. If the V2 price
+            seems incorrect, you can either make a swap to move the price or wait for someone else to do so.
           </TYPE.body>
           <AutoColumn gap="8px">
             <RowBetween>
@@ -381,8 +380,8 @@ export default function MigrateV1Exchange({
         ) : validatedAddress && chainId && token?.equals(WETH[chainId]) ? (
           <>
             <TYPE.body my={9} style={{ fontWeight: 400 }}>
-              Because Swap V2 uses WTRX under the hood, your Swap V1 WTRX/TRX liquidity cannot be migrated. You
-              may want to remove your liquidity instead.
+              Because Swap V2 uses WTRX under the hood, your Swap V1 WTRX/TRX liquidity cannot be migrated. You may want
+              to remove your liquidity instead.
             </TYPE.body>
 
             <ButtonConfirmed

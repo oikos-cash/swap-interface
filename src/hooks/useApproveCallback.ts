@@ -14,6 +14,8 @@ import { useTokenContract } from './useContract'
 import { useActiveWeb3React } from './index'
 import { Version } from './useToggledVersion'
 
+import { DEFAULT_FEE_LIMIT } from '../tron-config'
+
 export enum ApprovalState {
   UNKNOWN,
   NOT_APPROVED,
@@ -89,7 +91,7 @@ export function useApproveCallback(
       .approve(spender, useExact ? amountToApprove.raw.toString() : MaxUint256, {
         // @TRON
         // gasLimit: calculateGasMargin(estimatedGas)
-        gasLimit: 1
+        gasLimit: DEFAULT_FEE_LIMIT
       })
       .then((response: TransactionResponse) => {
         addTransaction(response, {
