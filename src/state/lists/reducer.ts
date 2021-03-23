@@ -45,7 +45,7 @@ const initialState: ListsState = {
       pendingUpdate: null
     }
   },
-  selectedListUrl: undefined
+  selectedListUrl: DEFAULT_TOKEN_LIST_URL
 }
 
 export default createReducer(initialState, builder =>
